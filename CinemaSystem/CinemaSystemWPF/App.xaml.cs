@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using CinemaSystemLibrary.DataAccess;
 using CinemaSystemLibrary.ViewModel;
 using CinemaSystemLibrary.Views;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CinemaSystemLibrary
@@ -37,11 +39,22 @@ namespace CinemaSystemLibrary
             services.AddSingleton<Room>();
         }
 
-        public void OnStartup(object sender, StartupEventArgs e)
+        private void Application_Startup(object sender, StartupEventArgs e)
         {
-            // Replace "Order" with the correct view you want to show.
-            var mainWindow = serviceProvider.GetService<FilmManagementForm>();
-            mainWindow.Show();
+
+        }
+
+        public void OnStartUp(object sender, StartupEventArgs e)
+        {
+            var builder = new ConfigurationBuilder()
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            IConfigurationRoot configuration = builder.Build();
+            var filmManagement = serviceProvider.GetService<IFilmManagement>();
+
+            // Khởi tạo FilmManagementForm với tham số IFilmManagement
+            var startUpWindow = new FilmManagementForm(filmManagement);
+            startUpWindow.Show();
         }
     }
 }
