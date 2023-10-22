@@ -34,9 +34,11 @@ namespace CinemaSystemLibrary
             services.AddSingleton<IBookingManagement, BookingVM>();
             services.AddSingleton<IFilmManagement, FilmVM>();
             services.AddSingleton<IRoomManagement, RoomVM>();
+            services.AddSingleton<IShowManagement, ShowVM>();
             services.AddSingleton<Booking>();
             services.AddSingleton<Film>();
             services.AddSingleton<Room>();
+            services.AddSingleton<Show>();
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
