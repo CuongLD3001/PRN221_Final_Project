@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace CinemaSystemLibrary.DataAccess;
 
@@ -28,7 +29,15 @@ public partial class CinemaSystemContext : DbContext
     public virtual DbSet<Show> Shows { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("server=localhost;database=CinemaSystem;user=sa;password=Paudzno1;TrustServerCertificate=True;");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var conf = new ConfigurationBuilder()
+              .SetBasePath(Directory.GetCurrentDirectory())
+              .AddJsonFile("appsettings.json").Build();
+            optionsBuilder.UseSqlServer(conf.GetConnectionString("MyConnection"));
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

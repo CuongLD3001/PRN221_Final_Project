@@ -10,6 +10,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -17,22 +18,22 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Button Grid.Row="0" Grid.Column="0" Content="Back" Click="BackToMenu_Click"></Button>
+        <Label Grid.Row="1" Grid.Column="0" Content="Film Title:" />
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtFilmTitle" Width="200" />
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Film Title:" />
-        <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtFilmTitle" Width="200" />
+        <Label Grid.Row="2" Grid.Column="0" Content="Show Time:" />
+        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="cboShowTime" Width="200" />
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Show Time:" />
-        <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cboShowTime" Width="200" />
+        <Label Grid.Row="3" Grid.Column="0" Content="Customer Name:" />
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtCustomerName" Width="200" />
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Customer Name:" />
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtCustomerName" Width="200" />
+        <Label Grid.Row="4" Grid.Column="0" Content="Select Seats:" />
+        <ListBox Grid.Row="4" Grid.Column="1" x:Name="lstSelectedSeats" Width="200" Height="100" SelectionMode="Multiple" />
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Select Seats:" />
-        <ListBox Grid.Row="3" Grid.Column="1" x:Name="lstSelectedSeats" Width="200" Height="100" SelectionMode="Multiple" />
+        <Button Grid.Row="5" Grid.Column="0" x:Name="btnBookSeats" Grid.ColumnSpan="2" Content="Book Seats" Click="BookSeats_Click" />
 
-        <Button Grid.Row="4" Grid.Column="0" x:Name="btnBookSeats" Grid.ColumnSpan="2" Content="Book Seats" Click="BookSeats_Click" />
-
-        <DataGrid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="dgBookingInfo" AutoGenerateColumns="True" />
+        <DataGrid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" x:Name="dgBookingInfo" AutoGenerateColumns="True" />
 
         <!-- Đặt các Control khác tại đây nếu cần -->
 

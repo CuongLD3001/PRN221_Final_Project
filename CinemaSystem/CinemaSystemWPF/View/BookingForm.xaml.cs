@@ -1,4 +1,5 @@
 ﻿using CinemaSystemLibrary.ViewModel;
+using CinemaSystemWPF.View;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -70,6 +71,13 @@ namespace CinemaSystemLibrary.Views
             // Tính giá vé dựa trên số lượng ghế đã đặt và thông tin show
             // Có thể thêm logic tính giá vé ở đây
             return numSeats * showPrice;
+        }
+
+        private void BackToMenu_Click(object sender, RoutedEventArgs e)
+        {
+            MenuForm menu = new MenuForm();
+            this.Visibility = Visibility.Hidden;
+            menu.Show();
         }
 
         // Tùy chỉnh và thêm các phương thức khác cần thiết

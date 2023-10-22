@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using CinemaSystemLibrary.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace CinemaSystemLibrary.DataAccess
 {
-    public class BookingManagerment
+    public class BookingManagerment: IBookingManagement
     {
         private static BookingManagerment instance = null;
         private static readonly object instanceLock = new object();
 
         private readonly CinemaSystemContext context;
 
-        private BookingManagerment()
+        public BookingManagerment()
         {
             context = new CinemaSystemContext();
         }

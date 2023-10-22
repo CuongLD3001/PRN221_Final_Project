@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using CinemaSystemLibrary.DataAccess;
+using CinemaSystemLibrary.ViewModel;
 
 namespace CinemaSystemLibrary.Controller
 {
-    public class FilmManagerment
+    public class FilmManagerment: IFilmManagement
     {
         private static FilmManagerment instance = null;
         private static readonly object instanceLock = new object();
 
         private readonly CinemaSystemContext context;
 
-        private FilmManagerment()
+        public FilmManagerment()
         {
             context = new CinemaSystemContext();
         }

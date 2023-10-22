@@ -9,6 +9,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -16,23 +19,25 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Button Grid.Column="0" Grid.Row="0" Content="Back" Click="BackToMenu_Click"></Button>
+        <Label Grid.Row="1" Grid.Column="0" Content="Room ID:" />
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtRoomID" Width="200" IsReadOnly="true"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Room Name:" />
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtRoomName" Width="200" />
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Room Name:" />
-        <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtRoomName" Width="200" />
+        <Label Grid.Row="3" Grid.Column="0" Content="Number of Rows:" />
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtNumberOfRows" Width="200" />
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Number of Rows:" />
-        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtNumberOfRows" Width="200" />
+        <Label Grid.Row="4" Grid.Column="0" Content="Number of Columns:" />
+        <TextBox Grid.Row="4" Grid.Column="1" x:Name="txtNumberOfColumns" Width="200" />
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Number of Columns:" />
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtNumberOfColumns" Width="200" />
+        <Button Grid.Row="5" Grid.Column="0" x:Name="btnAddRoom" Grid.ColumnSpan="2" Content="Add Room" Click="AddRoom_Click" />
 
-        <Button Grid.Row="3" Grid.Column="0" x:Name="btnAddRoom" Grid.ColumnSpan="2" Content="Add Room" Click="AddRoom_Click" />
+        <Button Grid.Row="6" Grid.Column="0" x:Name="btnUpdateRoom" Grid.ColumnSpan="2" Content="Update Room" Click="UpdateRoom_Click" />
 
-        <Button Grid.Row="4" Grid.Column="0" x:Name="btnUpdateRoom" Grid.ColumnSpan="2" Content="Update Room" Click="UpdateRoom_Click" />
+        <Button Grid.Row="7" Grid.Column="0" x:Name="btnDeleteRoom" Grid.ColumnSpan="2" Content="Delete Room" Click="DeleteRoom_Click" />
 
-        <Button Grid.Row="5" Grid.Column="0" x:Name="btnDeleteRoom" Grid.ColumnSpan="2" Content="Delete Room" Click="DeleteRoom_Click" />
-
-        <DataGrid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" x:Name="dgRooms" AutoGenerateColumns="True" />
+        <DataGrid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" x:Name="dgRooms" AutoGenerateColumns="True" SelectionChanged="dgRooms_SelectionChanged" />
 
         <!-- Đặt các Control khác tại đây nếu cần -->
 

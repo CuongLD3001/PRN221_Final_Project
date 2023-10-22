@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CinemaSystemLibrary.DataAccess;
 using CinemaSystemLibrary.ViewModel;
 using System.Windows;
+using CinemaSystemWPF.View;
 
 namespace CinemaSystemLibrary.Views
 {
@@ -78,6 +79,26 @@ namespace CinemaSystemLibrary.Views
 
             // Cập nhật DataGrid hoặc thông báo thành công
             dgRooms.ItemsSource = _roomManagement.GetAllRooms();
+        }
+
+        private void BackToMenu_Click(object sender, RoutedEventArgs e)
+        {
+            MenuForm menu = new MenuForm();
+            this.Visibility = Visibility.Hidden;
+            menu.Show();
+        }
+
+        private void dgRooms_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Room room = (Room)dgRooms.SelectedItem;
+            if (room != null)
+            {
+                txtRoomID.Text = room.RoomId.ToString();
+                txtRoomName.Text = room.Name;
+                txtNumberOfRows.Text = room.NumberRows.ToString();
+                txtNumberOfColumns.Text = room.NumberCols.ToString();
+            }
+            
         }
 
         // Tùy chỉnh và thêm các phương thức khác cần thiết

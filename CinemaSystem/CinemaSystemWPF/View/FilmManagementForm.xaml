@@ -9,6 +9,10 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -16,26 +20,29 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Button Grid.Column="0" Grid.Row="0" Content="Back" Click="BackToMenu_Click"></Button>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Film Title:" />
-        <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtFilmTitle" Width="200" />
+        <Label Grid.Row="1" Grid.Column="0" Content="Film ID:" />
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtFilmID" Width="200" IsReadOnly="true"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Film Title:" />
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtFilmTitle" Width="200" />
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Year:" />
-        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtYear" Width="200" />
+        <Label Grid.Row="3" Grid.Column="0" Content="Year:" />
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtYear" Width="200" />
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Genre:" />
-        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="cboGenre" Width="200" />
+        <Label Grid.Row="4" Grid.Column="0" Content="Genre:" />
+        <ComboBox Grid.Row="4" Grid.Column="1" x:Name="cboGenre" Width="200" />
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Country:" />
-        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="cboCountry" Width="200" />
+        <Label Grid.Row="5" Grid.Column="0" Content="Country:" />
+        <ComboBox Grid.Row="5" Grid.Column="1" x:Name="cboCountry" Width="200" />
 
-        <Button Grid.Row="4" Grid.Column="0" x:Name="btnAddFilm" Grid.ColumnSpan="2" Content="Add Film" Click="AddFilm_Click" />
+        <Button Grid.Row="6" Grid.Column="0" x:Name="btnAddFilm" Grid.ColumnSpan="2" Content="Add Film" Click="AddFilm_Click" />
 
-        <Button Grid.Row="5" Grid.Column="0" x:Name="btnUpdateFilm" Grid.ColumnSpan="2" Content="Update Film" Click="UpdateFilm_Click" />
+        <Button Grid.Row="7" Grid.Column="0" x:Name="btnUpdateFilm" Grid.ColumnSpan="2" Content="Update Film" Click="UpdateFilm_Click" />
 
-        <Button Grid.Row="6" Grid.Column="0" x:Name="btnDeleteFilm" Grid.ColumnSpan="2" Content="Delete Film" Click="DeleteFilm_Click" />
+        <Button Grid.Row="8" Grid.Column="0" x:Name="btnDeleteFilm" Grid.ColumnSpan="2" Content="Delete Film" Click="DeleteFilm_Click" />
 
-        <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" x:Name="dgFilms" AutoGenerateColumns="True" />
+        <DataGrid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" x:Name="dgFilms" AutoGenerateColumns="True" SelectionChanged="dgFilms_SelectionChanged" />
 
         <!-- Đặt các Control khác tại đây nếu cần -->
 
