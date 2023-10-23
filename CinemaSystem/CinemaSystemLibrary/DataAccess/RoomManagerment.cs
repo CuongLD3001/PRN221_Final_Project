@@ -35,16 +35,28 @@ namespace CinemaSystemLibrary.Controller
 
         public void AddRoom(string roomName, int numberOfRows, int numberOfColumns)
         {
-            Room room = new Room
-            {
-                Name = roomName,
-                NumberRows = numberOfRows,
-                NumberCols = numberOfColumns
-            };
+            // Kiểm tra xem đã tồn tại phòng với tên tương tự trong cơ sở dữ liệu chưa
+            var existingRoom = context.Rooms.FirstOrDefault(r => r.Name == roomName && r.NumberRows == numberOfRows && r.NumberCols == numberOfColumns);
 
-            context.Rooms.Add(room);
-            context.SaveChanges();
+            if (existingRoom == null)
+            {
+                // Nếu không có phòng nào có tên tương tự, thì tạo một phòng mới
+                Room room = new Room
+                {
+                    Name = roomName,
+                    NumberRows = numberOfRows,
+                    NumberCols = numberOfColumns
+                };
+
+                context.Rooms.Add(room);
+                context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Phòng đã tồn tại!");
+            }
         }
+
 
         public void UpdateRoom(int roomId, string roomName, int numberOfRows, int numberOfColumns)
         {

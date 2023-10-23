@@ -18,15 +18,6 @@ namespace CinemaSystemLibrary.Views
 
             // Thêm sự kiện khi form được khởi tạo
             Loaded += FilmManagementForm_Loaded;
-
-            // Thêm sự kiện khi click nút "Add Film"
-            btnAddFilm.Click += AddFilm_Click;
-
-            // Thêm sự kiện khi click nút "Update Film"
-            btnUpdateFilm.Click += UpdateFilm_Click;
-
-            // Thêm sự kiện khi click nút "Delete Film"
-            btnDeleteFilm.Click += DeleteFilm_Click;
         }
 
         // Sự kiện xảy ra khi form được tải
@@ -52,6 +43,7 @@ namespace CinemaSystemLibrary.Views
             // Cập nhật DataGrid hoặc thông báo thành công
             dgFilms.ItemsSource = _filmManagement.GetAllFilms();
         }
+
 
         // Sự kiện xảy ra khi click nút "Update Film"
         private void UpdateFilm_Click(object sender, RoutedEventArgs e)

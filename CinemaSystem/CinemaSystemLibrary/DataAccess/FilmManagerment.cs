@@ -35,17 +35,29 @@ namespace CinemaSystemLibrary.Controller
 
         public void AddFilm(string title, int year, int genreId, string countryCode)
         {
-            Film film = new Film
-            {
-                Title = title,
-                Year = year,
-                GenreId = genreId,
-                CountryCode = countryCode
-            };
+            // Kiểm tra xem đã tồn tại bộ phim với Title và Year tương tự trong cơ sở dữ liệu chưa
+            var existingFilm = context.Films.FirstOrDefault(f => f.Title == title && f.Year == year);
 
-            context.Films.Add(film);
-            context.SaveChanges();
+            if (existingFilm == null)
+            {
+                // Nếu không có bộ phim nào có Title và Year tương tự, thì tạo một bộ phim mới
+                Film film = new Film
+                {
+                    Title = title,
+                    Year = year,
+                    GenreId = genreId,
+                    CountryCode = countryCode
+                };
+
+                context.Films.Add(film);
+                context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Bộ phim đã tồn tại!");
+            }
         }
+
 
         public void UpdateFilm(int filmId, string title, int year, int genreId, string countryCode)
         {

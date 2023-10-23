@@ -34,17 +34,30 @@ namespace CinemaSystemLibrary.DataAccess
 
         public void AddBooking(int showId, string seatNumber, double? amount, string status)
         {
-            Booking booking = new Booking
-            {
-                ShowId = showId,
-                SeatNumber = seatNumber,
-                Amount = amount,
-                Status = status
-            };
+            // Kiểm tra xem đã tồn tại đặt vé với thông tin tương tự trong cơ sở dữ liệu chưa
+            var existingBooking = context.Bookings.FirstOrDefault(b => b.ShowId == showId && b.SeatNumber == seatNumber);
 
-            context.Bookings.Add(booking);
-            context.SaveChanges();
+            if (existingBooking == null)
+            {
+                // Nếu không có đặt vé nào có thông tin tương tự, thì tạo một đặt vé mới
+                Booking booking = new Booking
+                {
+                    ShowId = showId,
+                    SeatNumber = seatNumber,
+                    Amount = amount,
+                    Status = status
+                };
+
+                context.Bookings.Add(booking);
+                context.SaveChanges();
+            }
+            else
+            {
+                // Báo lỗi hoặc thực hiện xử lý phù hợp nếu đặt vé đã tồn tại
+                // Ví dụ: throw new Exception("Đặt vé đã tồn tại!");
+            }
         }
+
 
         public List<Booking> GetBookingsForShow(int showId)
         {

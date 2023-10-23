@@ -34,19 +34,32 @@ namespace CinemaSystemLibrary.Controller
 
         public void AddShow(int roomId, int filmId, DateTime showDate, double price, string status, int slot)
         {
-            Show show = new Show
-            {
-                RoomId = roomId,
-                FilmId = filmId,
-                ShowDate = showDate,
-                Price = price,
-                Status = status,
-                Slot = slot
-            };
+            // Kiểm tra xem đã tồn tại suất chiếu với ID tương tự trong cơ sở dữ liệu chưa
+            var existingShow = context.Shows.FirstOrDefault(s => s.RoomId == roomId && s.FilmId == filmId && s.ShowDate == showDate && s.Slot == slot);
 
-            context.Shows.Add(show);
-            context.SaveChanges();
+            if (existingShow == null)
+            {
+                // Nếu không có suất chiếu nào có thông tin tương tự, thì tạo một suất chiếu mới
+                Show show = new Show
+                {
+                    RoomId = roomId,
+                    FilmId = filmId,
+                    ShowDate = showDate,
+                    Price = price,
+                    Status = status,
+                    Slot = slot
+                };
+
+                context.Shows.Add(show);
+                context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Suất chiếu đã tồn tại!");
+            }
         }
+
+
 
         public void UpdateShow(int showId, int roomId, int filmId, DateTime showDate, double price, string status, int slot)
         {

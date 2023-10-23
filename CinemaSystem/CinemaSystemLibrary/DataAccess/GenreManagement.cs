@@ -30,12 +30,24 @@ namespace CinemaSystemLibrary.DataAccess
 
         public void AddGenre(string name)
         {
-            Genre g = new Genre()
+            // Kiểm tra xem đã tồn tại thể loại với tên tương tự trong cơ sở dữ liệu chưa
+            var existingGenre = context.Genres.FirstOrDefault(g => g.Name == name);
+
+            if (existingGenre == null)
             {
-                Name = name
-            };
-            context.Genres.Add(g);
-            context.SaveChanges();
+                // Nếu không có thể loại nào có tên tương tự, thì tạo một thể loại mới
+                Genre g = new Genre()
+                {
+                    Name = name
+                };
+
+                context.Genres.Add(g);
+                context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Thể loại đã tồn tại!");
+            }
         }
         public void UpdateGenre(int genreId, string name)
         {
