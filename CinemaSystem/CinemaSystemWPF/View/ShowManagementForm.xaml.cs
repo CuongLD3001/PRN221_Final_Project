@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using CinemaSystemLibrary.DataAccess;
 using CinemaSystemLibrary.ViewModel;
+using CinemaSystemWPF.View;
 
 namespace CinemaSystemLibrary.Views
 {
@@ -87,6 +88,13 @@ namespace CinemaSystemLibrary.Views
             // Cập nhật DataGrid hoặc thông báo thành công
             List<Show> shows = _showManagement.GetAllShows();
             dgShows.ItemsSource = shows;
+        }
+
+        private void BackToMenu_Click(object sender, RoutedEventArgs e)
+        {
+            MenuForm menu = new MenuForm();
+            this.Visibility = Visibility.Hidden;
+            menu.Show();
         }
 
         // Tùy chỉnh và thêm các phương thức khác cần thiết

@@ -56,7 +56,11 @@ namespace CinemaSystemWPF.View
 
         private void ShowManagement_Click(object sender, RoutedEventArgs e)
         {
-          //  ShowManagement
+            IShowManagement filmManagement = new ShowManagement();
+            ShowManagementForm showForm = new ShowManagementForm(filmManagement);
+            this.Visibility = Visibility.Hidden;
+            showForm.Show();
+
         }
 
         private void RoomManagement_Click(object sender, RoutedEventArgs e)

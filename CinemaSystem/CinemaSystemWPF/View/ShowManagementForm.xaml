@@ -13,6 +13,10 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -21,31 +25,36 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Room:" />
-        <ComboBox Grid.Row="0" Grid.Column="1" x:Name="cboRoom" Width="200" />
+        <Button Grid.Column="0" Grid.Row="0" Content="Back" Click="BackToMenu_Click"></Button>
+        <Label Grid.Row="1" Grid.Column="0" Content="Room ID:" />
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtRoomID" Width="200" IsReadOnly="true"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Room Name:" />
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Film:" />
-        <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cboFilm" Width="200" />
+        <Label Grid.Row="3" Grid.Column="0" Content="Room:" />
+        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="cboRoom" Width="200" />
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Show Date:" />
-        <DatePicker Grid.Row="2" Grid.Column="1" x:Name="dpShowDate" Width="200" />
+        <Label Grid.Row="4" Grid.Column="0" Content="Film:" />
+        <ComboBox Grid.Row="4" Grid.Column="1" x:Name="cboFilm" Width="200" />
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Price:" />
-        <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtPrice" Width="200" />
+        <Label Grid.Row="5" Grid.Column="0" Content="Show Date:" />
+        <DatePicker Grid.Row="5" Grid.Column="1" x:Name="dpShowDate" Width="200" />
 
-        <Label Grid.Row="4" Grid.Column="0" Content="Status:" />
-        <TextBox Grid.Row="4" Grid.Column="1" x:Name="txtStatus" Width="200" />
+        <Label Grid.Row="6" Grid.Column="0" Content="Price:" />
+        <TextBox Grid.Row="6" Grid.Column="1" x:Name="txtPrice" Width="200" />
 
-        <Label Grid.Row="5" Grid.Column="0" Content="Slot:" />
-        <TextBox Grid.Row="5" Grid.Column="1" x:Name="txtSlot" Width="200" />
+        <Label Grid.Row="7" Grid.Column="0" Content="Status:" />
+        <TextBox Grid.Row="7" Grid.Column="1" x:Name="txtStatus" Width="200" />
 
-        <Button Grid.Row="6" Grid.Column="0" x:Name="btnAddShow" Grid.ColumnSpan="2" Content="Add Show" Click="AddShow_Click" />
+        <Label Grid.Row="8" Grid.Column="0" Content="Slot:" />
+        <TextBox Grid.Row="8" Grid.Column="1" x:Name="txtSlot" Width="200" />
 
-        <Button Grid.Row="7" Grid.Column="0" x:Name="btnUpdateShow" Grid.ColumnSpan="2" Content="Update Show" Click="UpdateShow_Click" />
+        <Button Grid.Row="9" Grid.Column="0" x:Name="btnAddShow" Grid.ColumnSpan="2" Content="Add Show" Click="AddShow_Click" />
 
-        <Button Grid.Row="8" Grid.Column="0" x:Name="btnDeleteShow" Grid.ColumnSpan="2" Content="Delete Show" Click="DeleteShow_Click" />
+        <Button Grid.Row="10" Grid.Column="0" x:Name="btnUpdateShow" Grid.ColumnSpan="2" Content="Update Show" Click="UpdateShow_Click" />
 
-        <DataGrid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" x:Name="dgShows" AutoGenerateColumns="True" />
+        <Button Grid.Row="11" Grid.Column="0" x:Name="btnDeleteShow" Grid.ColumnSpan="2" Content="Delete Show" Click="DeleteShow_Click" />
+
+        <DataGrid Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" x:Name="dgShows" AutoGenerateColumns="True" />
 
         <!-- Đặt các Control khác tại đây nếu cần -->
 

@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using CinemaSystemLibrary.DataAccess;
+using CinemaSystemLibrary.ViewModel;
 
 namespace CinemaSystemLibrary.Controller
 {
-    public class ShowManagement
+    public class ShowManagement:IShowManagement
     {
         private static ShowManagement instance = null;
         private static readonly object instanceLock = new object();
 
         private readonly CinemaSystemContext context;
 
-        private ShowManagement()
+        public ShowManagement()
         {
             context = new CinemaSystemContext();
         }

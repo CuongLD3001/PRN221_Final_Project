@@ -10,11 +10,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-<<<<<<< HEAD
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-=======
->>>>>>> cuongld/base_code
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
