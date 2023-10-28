@@ -10,10 +10,14 @@ namespace CinemaSystemLibrary.Views
     public partial class FilmManagementForm : Window
     {
         private IFilmManagement _filmManagement;
+        private ICountryManagement _countryManagement;
+        private IGenreManagement _genreManagement;
 
-        public FilmManagementForm(IFilmManagement filmManagement)
+        public FilmManagementForm(IFilmManagement filmManagement, ICountryManagement countryManagement, IGenreManagement genreManagement)
         {
             _filmManagement = filmManagement;
+            _countryManagement = countryManagement;
+            _genreManagement = genreManagement;
             InitializeComponent();
 
             // Thêm sự kiện khi form được khởi tạo
@@ -94,6 +98,26 @@ namespace CinemaSystemLibrary.Views
                 cboCountry.Text = film.CountryCode.ToString();
             }
         }
+
+        private void cboGenre_Loaded(object sender, RoutedEventArgs e)
+        {
+           List<Genre> list = _genreManagement.GetAllGenres();
+            cboGenre.ItemsSource = list;
+            cboGenre.SelectedValuePath = "GenreId";
+            cboGenre.DisplayMemberPath = "Name";
+        }
+
+        private void cboCountry_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<Country> countries = _countryManagement.GetAllCountries();
+            cboCountry.ItemsSource = countries;
+            cboCountry.DisplayMemberPath = "CountryName";
+            cboCountry.SelectedValuePath = "CountryCode";
+        }
+
+
+
+
 
         // Tùy chỉnh và thêm các phương thức khác cần thiết
     }

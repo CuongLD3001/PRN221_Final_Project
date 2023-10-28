@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CinemaSystemLibrary.DataAccess;
 using CinemaSystemLibrary.ViewModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace CinemaSystemLibrary.Controller
 {
@@ -34,12 +35,7 @@ namespace CinemaSystemLibrary.Controller
 
         public void AddShow(int roomId, int filmId, DateTime showDate, double price, string status, int slot)
         {
-            // Kiểm tra xem đã tồn tại suất chiếu với ID tương tự trong cơ sở dữ liệu chưa
-            var existingShow = context.Shows.FirstOrDefault(s => s.RoomId == roomId && s.FilmId == filmId && s.ShowDate == showDate && s.Slot == slot);
-
-            if (existingShow == null)
-            {
-                // Nếu không có suất chiếu nào có thông tin tương tự, thì tạo một suất chiếu mới
+            
                 Show show = new Show
                 {
                     RoomId = roomId,
@@ -52,11 +48,8 @@ namespace CinemaSystemLibrary.Controller
 
                 context.Shows.Add(show);
                 context.SaveChanges();
-            }
-            else
-            {
-                throw new Exception("Suất chiếu đã tồn tại!");
-            }
+            
+            
         }
 
 
@@ -91,7 +84,8 @@ namespace CinemaSystemLibrary.Controller
 
         public List<Show> GetAllShows()
         {
-            return context.Shows.ToList();
+
+            return context.Shows.Include(s => s.Film).Include( s => s.Room).ToList();
         }
     }
 }

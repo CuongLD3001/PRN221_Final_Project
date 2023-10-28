@@ -31,10 +31,10 @@
         <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtYear" Width="200" />
 
         <Label Grid.Row="4" Grid.Column="0" Content="Genre:" />
-        <ComboBox Grid.Row="4" Grid.Column="1" x:Name="cboGenre" Width="200" />
+        <ComboBox Grid.Row="4" Grid.Column="1" x:Name="cboGenre" Width="200" Loaded="cboGenre_Loaded" />
 
         <Label Grid.Row="5" Grid.Column="0" Content="Country:" />
-        <ComboBox Grid.Row="5" Grid.Column="1" x:Name="cboCountry" Width="200" />
+        <ComboBox Grid.Row="5" Grid.Column="1" x:Name="cboCountry" Width="200" Loaded="cboCountry_Loaded" />
 
         <Button Grid.Row="6" Grid.Column="0" x:Name="btnAddFilm" Grid.ColumnSpan="2" Content="Add Film" Click="AddFilm_Click" />
 

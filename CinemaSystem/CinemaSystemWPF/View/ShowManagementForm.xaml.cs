@@ -10,10 +10,15 @@ namespace CinemaSystemLibrary.Views
     public partial class ShowManagementForm : Window
     {
         private IShowManagement _showManagement;
+        private IRoomManagement _roomManagement;
+        private IFilmManagement _filmManagement;
+        public List<int> slots = new List<int> { 1, 2, 3, 4, 5,6, 7, 8, 9 };
 
-        public ShowManagementForm(IShowManagement showManagement)
+        public ShowManagementForm(IShowManagement showManagement, IRoomManagement roomManagement, IFilmManagement filmManagement)
         {
             _showManagement = showManagement;
+            _roomManagement = roomManagement;
+            _filmManagement = filmManagement;
             InitializeComponent();
 
             // Thêm sự kiện khi form được khởi tạo
@@ -27,6 +32,8 @@ namespace CinemaSystemLibrary.Views
 
             // Thêm sự kiện khi click nút "Delete Show"
             btnDeleteShow.Click += DeleteShow_Click;
+            _roomManagement = roomManagement;
+            _filmManagement = filmManagement;
         }
 
         // Sự kiện xảy ra khi form được tải
@@ -46,7 +53,7 @@ namespace CinemaSystemLibrary.Views
             DateTime showDate = dpShowDate.SelectedDate ?? DateTime.Now;
             double price = double.Parse(txtPrice.Text);
             string status = txtStatus.Text;
-            int slot = int.Parse(txtSlot.Text);
+            int slot = int.Parse(cboSlot.Text);
 
             // Thêm show mới
             _showManagement.AddShow(roomId, filmId, showDate, price, status, slot);
@@ -66,8 +73,7 @@ namespace CinemaSystemLibrary.Views
             DateTime showDate = dpShowDate.SelectedDate ?? DateTime.Now;
             double price = double.Parse(txtPrice.Text);
             string status = txtStatus.Text;
-            int slot = int.Parse(txtSlot.Text);
-
+            int slot = int.Parse(cboSlot.Text);
             // Cập nhật show
             _showManagement.UpdateShow(showId, roomId, filmId, showDate, price, status, slot);
 
@@ -96,6 +102,46 @@ namespace CinemaSystemLibrary.Views
             this.Visibility = Visibility.Hidden;
             menu.Show();
         }
+
+        private void cboRoom_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<Room> rooms = _roomManagement.GetAllRooms();
+            cboRoom.ItemsSource = rooms;
+            cboRoom.DisplayMemberPath = "Name";
+            cboRoom.SelectedValuePath = "RoomId";
+        }
+
+        private void cboSlot_Loaded(object sender, RoutedEventArgs e)
+        {
+            cboSlot.ItemsSource = slots;
+
+        }
+
+        private void cboFilm_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<Film> films = _filmManagement.GetAllFilms();
+            cboFilm.ItemsSource = films;
+            cboFilm.DisplayMemberPath = "Title";
+            cboFilm.SelectedValuePath = "FilmId";
+        }
+
+
+        private void dgShows_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Show show = (Show)dgShows.SelectedItem;
+            if (show != null)
+            {
+                txtShowId.Text = show.ShowId.ToString();
+                txtPrice.Text = show.Price.ToString();
+                txtStatus.Text = show.Status.ToString();
+                cboFilm.Text = show.Film.Title;
+                cboRoom.Text = show.Room.Name;
+                cboSlot.Text = show.Slot.ToString();
+                dpShowDate.Text = show.ShowDate.ToString();
+            }
+        }
+
+
 
         // Tùy chỉnh và thêm các phương thức khác cần thiết
     }

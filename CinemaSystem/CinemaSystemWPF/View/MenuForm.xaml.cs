@@ -41,7 +41,9 @@ namespace CinemaSystemWPF.View
         private void FilmManagement_Click(object sender, RoutedEventArgs e)
         {
             IFilmManagement filmManagement = new FilmManagerment();
-            FilmManagementForm firmForm = new FilmManagementForm(filmManagement);
+            ICountryManagement countryManagement = new CountryManagement();
+            IGenreManagement genreManagement = new GenreManagement();
+            FilmManagementForm firmForm = new FilmManagementForm(filmManagement, countryManagement, genreManagement);
             this.Visibility = Visibility.Hidden;
             firmForm.Show();
         }
@@ -56,8 +58,10 @@ namespace CinemaSystemWPF.View
 
         private void ShowManagement_Click(object sender, RoutedEventArgs e)
         {
-            IShowManagement filmManagement = new ShowManagement();
-            ShowManagementForm showForm = new ShowManagementForm(filmManagement);
+            IShowManagement showManagement = new ShowManagement();
+            IRoomManagement roomManagement = new RoomManagerment();
+            IFilmManagement filmManagement = new FilmManagerment();
+            ShowManagementForm showForm = new ShowManagementForm(showManagement, roomManagement, filmManagement);
             this.Visibility = Visibility.Hidden;
             showForm.Show();
 
@@ -70,6 +74,14 @@ namespace CinemaSystemWPF.View
             this.Visibility = Visibility.Hidden;
             roomForm.Show();
 
+        }
+
+        private void CountryManagement_Click(object sender, RoutedEventArgs e)
+        {
+            ICountryManagement countryManagement = new CountryManagement();
+            CountryManagementForm countryForm = new CountryManagementForm(countryManagement);
+            this.Visibility = Visibility.Hidden;
+            countryForm.Show();
         }
     }
 }

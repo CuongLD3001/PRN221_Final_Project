@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Menu" Height="450" Width="800">
     <Grid>
+        <Button Content="Country Management" HorizontalAlignment="Left" Margin="93,26,0,0" VerticalAlignment="Top" Width="135" Click="CountryManagement_Click"/>
         <Button Content="Genre Management" HorizontalAlignment="Left" Margin="93,78,0,0" VerticalAlignment="Top" Width="135" Click="GenreManagement_Click"/>
         <Button Content="Film Management" HorizontalAlignment="Left" Margin="93,132,0,0" VerticalAlignment="Top" Width="135" Click="FilmManagement_Click"/>
         <Button Content="Booking Management" HorizontalAlignment="Left" Margin="93,282,0,0" VerticalAlignment="Top" Width="135" Click="BookingManagement_Click" RenderTransformOrigin="0.443,1.625"/>
