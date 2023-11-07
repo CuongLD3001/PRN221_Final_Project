@@ -42,53 +42,64 @@ namespace CinemaSystemWPF.View
             }
         }
 
+        // Sự kiện xảy ra khi click nút "Add Country"
         private void AddCountry_Click(object sender, RoutedEventArgs e)
         {
             string countryCode = txtCountryCode.Text;
             string countryName = txtCountryName.Text;
-            if (countryCode == null || countryName == null)
+            if (string.IsNullOrEmpty(countryCode) || string.IsNullOrEmpty(countryName))
             {
-                MessageBox.Show("Code and Name must be required");
+                MessageBox.Show("Code and Name must be required.");
+                return;
             }
+
             try
             {
                 _countryManagement.AddCountry(countryCode, countryName);
                 dgCountrys.ItemsSource = _countryManagement.GetAllCountries();
+                MessageBox.Show("Quốc gia đã được thêm thành công.");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
+        // Sự kiện xảy ra khi click nút "Update Country"
         private void UpdateCountry_Click(object sender, RoutedEventArgs e)
         {
             string countryCode = txtCountryCode.Text;
             string countryName = txtCountryName.Text;
+
             try
             {
                 _countryManagement.UpdateCountry(countryCode, countryName);
                 dgCountrys.ItemsSource = _countryManagement.GetAllCountries();
+                MessageBox.Show("Quốc gia đã được cập nhật thành công.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
+        // Sự kiện xảy ra khi click nút "Delete Country"
         private void DeleteCountry_Click(object sender, RoutedEventArgs e)
         {
             string countryCode = txtCountryCode.Text;
+
             try
             {
                 _countryManagement.DeleteCountry(countryCode);
                 dgCountrys.ItemsSource = _countryManagement.GetAllCountries();
+                MessageBox.Show("Quốc gia đã được xóa thành công.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private void BackToMenu_Click(object sender, RoutedEventArgs e)
         {

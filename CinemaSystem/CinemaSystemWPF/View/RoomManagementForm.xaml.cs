@@ -53,32 +53,52 @@ namespace CinemaSystemLibrary.Views
 
 
         // Sự kiện xảy ra khi click nút "Update Room"
+        // Sự kiện xảy ra khi click nút "Update Room"
         private void UpdateRoom_Click(object sender, RoutedEventArgs e)
         {
-            // Lấy thông tin từ TextBox và DataGrid
-            int roomId = int.Parse(txtRoomID.Text); // Lấy Room ID từ TextBox
-            string roomName = txtRoomName.Text;
-            int numberOfRows = int.Parse(txtNumberOfRows.Text);
-            int numberOfColumns = int.Parse(txtNumberOfColumns.Text);
+            try
+            {
+                // Lấy thông tin từ TextBox và DataGrid
+                int roomId = int.Parse(txtRoomID.Text); // Lấy Room ID từ TextBox
+                string roomName = txtRoomName.Text;
+                int numberOfRows = int.Parse(txtNumberOfRows.Text);
+                int numberOfColumns = int.Parse(txtNumberOfColumns.Text);
 
-            // Cập nhật phòng
-            _roomManagement.UpdateRoom(roomId, roomName, numberOfRows, numberOfColumns);
+                // Cập nhật phòng
+                _roomManagement.UpdateRoom(roomId, roomName, numberOfRows, numberOfColumns);
 
-            // Cập nhật DataGrid hoặc thông báo thành công
-            dgRooms.ItemsSource = _roomManagement.GetAllRooms();
+                // Cập nhật DataGrid hoặc thông báo thành công
+                dgRooms.ItemsSource = _roomManagement.GetAllRooms();
+                MessageBox.Show("Phòng đã được cập nhật thành công.");
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu xảy ra lỗi
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         // Sự kiện xảy ra khi click nút "Delete Room"
         private void DeleteRoom_Click(object sender, RoutedEventArgs e)
         {
-            // Lấy thông tin từ DataGrid
-            int roomId = int.Parse(txtRoomID.Text); // Lấy Room ID từ TextBox
+            try
+            {
+                // Lấy thông tin từ DataGrid
+                int roomId = int.Parse(txtRoomID.Text); // Lấy Room ID từ TextBox
 
-            // Xóa phòng
-            _roomManagement.DeleteRoom(roomId);
+                // Xóa phòng
+                _roomManagement.DeleteRoom(roomId);
 
-            // Cập nhật DataGrid hoặc thông báo thành công
-            dgRooms.ItemsSource = _roomManagement.GetAllRooms();
+                // Cập nhật DataGrid hoặc thông báo thành công
+                dgRooms.ItemsSource = _roomManagement.GetAllRooms();
+                MessageBox.Show("Phòng đã được xóa thành công.");
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu xảy ra lỗi
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void BackToMenu_Click(object sender, RoutedEventArgs e)

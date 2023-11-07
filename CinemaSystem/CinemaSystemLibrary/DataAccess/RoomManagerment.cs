@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CinemaSystemLibrary.DataAccess;
 using CinemaSystemLibrary.ViewModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace CinemaSystemLibrary.Controller
 {

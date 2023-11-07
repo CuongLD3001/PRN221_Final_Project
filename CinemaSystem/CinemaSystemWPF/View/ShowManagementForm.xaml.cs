@@ -24,14 +24,6 @@ namespace CinemaSystemLibrary.Views
             // Thêm sự kiện khi form được khởi tạo
             Loaded += ShowManagementForm_Loaded;
 
-            // Thêm sự kiện khi click nút "Add Show"
-            btnAddShow.Click += AddShow_Click;
-
-            // Thêm sự kiện khi click nút "Update Show"
-            btnUpdateShow.Click += UpdateShow_Click;
-
-            // Thêm sự kiện khi click nút "Delete Show"
-            btnDeleteShow.Click += DeleteShow_Click;
             _roomManagement = roomManagement;
             _filmManagement = filmManagement;
         }
@@ -45,55 +37,93 @@ namespace CinemaSystemLibrary.Views
         }
 
         // Sự kiện xảy ra khi click nút "Add Show"
+        // Sự kiện xảy ra khi click nút "Add Show"
         private void AddShow_Click(object sender, RoutedEventArgs e)
         {
-            // Lấy thông tin từ TextBox, ComboBox và DatePicker
-            int roomId = ((Room)cboRoom.SelectedItem).RoomId;
-            int filmId = ((Film)cboFilm.SelectedItem).FilmId;
-            DateTime showDate = dpShowDate.SelectedDate ?? DateTime.Now;
-            double price = double.Parse(txtPrice.Text);
-            string status = txtStatus.Text;
-            int slot = int.Parse(cboSlot.Text);
+            try
+            {
+                // Lấy thông tin từ TextBox, ComboBox và DatePicker
+                int roomId = ((Room)cboRoom.SelectedItem).RoomId;
+                int filmId = ((Film)cboFilm.SelectedItem).FilmId;
+                DateTime showDate = dpShowDate.SelectedDate ?? DateTime.Now;
+                double price = double.Parse(txtPrice.Text);
+                string status = txtStatus.Text;
+                int slot = int.Parse(cboSlot.Text);
 
-            // Thêm show mới
-            _showManagement.AddShow(roomId, filmId, showDate, price, status, slot);
+                // Thêm show mới
+                _showManagement.AddShow(roomId, filmId, showDate, price, status, slot);
 
-            // Cập nhật DataGrid hoặc thông báo thành công
-            List<Show> shows = _showManagement.GetAllShows();
-            dgShows.ItemsSource = shows;
+                // Cập nhật DataGrid hoặc thông báo thành công
+                List<Show> shows = _showManagement.GetAllShows();
+                dgShows.ItemsSource = shows;
+                MessageBox.Show("Show đã được thêm thành công.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
+            }
         }
 
+
+        // Sự kiện xảy ra khi click nút "Update Show"
         // Sự kiện xảy ra khi click nút "Update Show"
         private void UpdateShow_Click(object sender, RoutedEventArgs e)
         {
-            // Lấy thông tin từ TextBox, ComboBox, DatePicker và DataGrid
-            int showId = ((Show)dgShows.SelectedItem).ShowId;
-            int roomId = ((Room)cboRoom.SelectedItem).RoomId;
-            int filmId = ((Film)cboFilm.SelectedItem).FilmId;
-            DateTime showDate = dpShowDate.SelectedDate ?? DateTime.Now;
-            double price = double.Parse(txtPrice.Text);
-            string status = txtStatus.Text;
-            int slot = int.Parse(cboSlot.Text);
-            // Cập nhật show
-            _showManagement.UpdateShow(showId, roomId, filmId, showDate, price, status, slot);
+            try
+            {
+                // Kiểm tra xem có một phần tử nào đang được chọn hay không
+                if (dgShows.SelectedItem != null)
+                {
+                    // Lấy thông tin từ DataGrid
+                    int showId = ((Show)dgShows.SelectedItem).ShowId;
+                    int roomId = ((Room)cboRoom.SelectedItem).RoomId;
+                    int filmId = ((Film)cboFilm.SelectedItem).FilmId;
+                    DateTime showDate = dpShowDate.SelectedDate ?? DateTime.Now;
+                    double price = double.Parse(txtPrice.Text);
+                    string status = txtStatus.Text;
+                    int slot = int.Parse(cboSlot.Text);
+                    // Cập nhật show
+                    _showManagement.UpdateShow(showId, roomId, filmId, showDate, price, status, slot);
 
-            // Cập nhật DataGrid hoặc thông báo thành công
-            List<Show> shows = _showManagement.GetAllShows();
-            dgShows.ItemsSource = shows;
+                    // Cập nhật DataGrid hoặc thông báo thành công
+                    List<Show> shows = _showManagement.GetAllShows();
+                    dgShows.ItemsSource = shows;
+                    MessageBox.Show("Show đã được cập nhật thành công.");
+                }
+                else
+                {
+                    // Xử lý tại đây khi không có phần tử nào được chọn
+                    MessageBox.Show("Vui lòng chọn một show để cập nhật.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
+            }
         }
+
 
         // Sự kiện xảy ra khi click nút "Delete Show"
         private void DeleteShow_Click(object sender, RoutedEventArgs e)
         {
-            // Lấy thông tin từ DataGrid
-            int showId = ((Show)dgShows.SelectedItem).ShowId;
+            // Kiểm tra xem có một phần tử nào đang được chọn hay không
+            if (dgShows.SelectedItem != null)
+            {
+                // Lấy thông tin từ DataGrid
+                int showId = ((Show)dgShows.SelectedItem).ShowId;
 
-            // Xóa show
-            _showManagement.DeleteShow(showId);
+                // Xóa show
+                _showManagement.DeleteShow(showId);
 
-            // Cập nhật DataGrid hoặc thông báo thành công
-            List<Show> shows = _showManagement.GetAllShows();
-            dgShows.ItemsSource = shows;
+                // Cập nhật DataGrid hoặc thông báo thành công
+                List<Show> shows = _showManagement.GetAllShows();
+                dgShows.ItemsSource = shows;
+            }
+            else
+            {
+                // Xử lý tại đây khi không có phần tử nào được chọn
+                MessageBox.Show("Vui lòng chọn một show để xóa.");
+            }
         }
 
         private void BackToMenu_Click(object sender, RoutedEventArgs e)

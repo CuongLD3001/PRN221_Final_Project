@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CinemaSystemLibrary.DataAccess;
 using CinemaSystemLibrary.ViewModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace CinemaSystemLibrary.Controller
 {
@@ -87,7 +88,10 @@ namespace CinemaSystemLibrary.Controller
 
         public List<Film> GetAllFilms()
         {
-            return context.Films.ToList();
+            return context.Films
+                .Include(x => x.Genre)
+                .Include(x => x.CountryCodeNavigation)
+                .ToList();
         }
     }
 }

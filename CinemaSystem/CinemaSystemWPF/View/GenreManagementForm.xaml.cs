@@ -52,24 +52,49 @@ namespace CinemaSystemLibrary.Views
 
 
         // Sự kiện xảy ra khi click nút "Update Genre"
+        // Sự kiện xảy ra khi click nút "Update Genre"
         private void UpdateGenre_Click(object sender, RoutedEventArgs e)
         {
-            int genreId = int.Parse(txtGenreID.Text); // Lấy Genre ID từ TextBox
-            string genreName = txtGenreName.Text;
-            _genreManagement.UpdateGenre(genreId, genreName);
+            try
+            {
+                int genreId = int.Parse(txtGenreID.Text); // Lấy Genre ID từ TextBox
+                string genreName = txtGenreName.Text;
 
-            dgGenres.ItemsSource = _genreManagement.GetAllGenres();
+                // Cập nhật thể loại
+                _genreManagement.UpdateGenre(genreId, genreName);
+
+                // Cập nhật DataGrid hoặc thông báo thành công
+                dgGenres.ItemsSource = _genreManagement.GetAllGenres();
+                MessageBox.Show("Thể loại đã được cập nhật thành công.");
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu xảy ra lỗi
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         // Sự kiện xảy ra khi click nút "Delete Genre"
         private void DeleteGenre_Click(object sender, RoutedEventArgs e)
         {
-            int genreId = int.Parse(txtGenreID.Text); // Lấy Genre ID từ TextBox
+            try
+            {
+                int genreId = int.Parse(txtGenreID.Text); // Lấy Genre ID từ TextBox
 
-            _genreManagement.DeleteGenre(genreId);
+                // Xóa thể loại
+                _genreManagement.DeleteGenre(genreId);
 
-            dgGenres.ItemsSource = _genreManagement.GetAllGenres();
+                // Cập nhật DataGrid hoặc thông báo thành công
+                dgGenres.ItemsSource = _genreManagement.GetAllGenres();
+                MessageBox.Show("Thể loại đã được xóa thành công.");
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu xảy ra lỗi
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         private void BackToMenu_Click(object sender, RoutedEventArgs e)
         {
