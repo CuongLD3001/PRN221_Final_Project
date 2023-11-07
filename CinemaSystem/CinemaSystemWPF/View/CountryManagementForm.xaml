@@ -5,37 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CinemaSystemWPF.View"
         mc:Ignorable="d"
-        Title="CountryManagementForm" Height="450" Width="800">
+        Title="CountryManagementForm" Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="AliceBlue">
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Width" Value="100" />
+                <Setter Property="Height" Value="20" />
+                <Setter Property="Margin" Value="5 0 0 0" />
+                <Setter Property="FontWeight" Value="DemiBold" />
+                <Setter Property="Background" Value="SkyBlue" />
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="400" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Grid.Row="0" Content="Back" Click="BackToMenu_Click"></Button>
+        <Button Grid.Column="0" Grid.Row="0" Content="Back" HorizontalAlignment="Left" Click="BackToMenu_Click"></Button>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Country Code:" />
-        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtCountryCode" Width="200"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Country Name:" />
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtCountryName" Width="200" />
+        <WrapPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Width="100" Content="Country Code:" />
+            <TextBox x:Name="txtCountryCode" Width="200"/>
+        </WrapPanel>
+        <WrapPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Width="100"  Content="Country Name:" />
+            <TextBox x:Name="txtCountryName" Width="200" />
+        </WrapPanel>
+
+        <WrapPanel Grid.Row="3" Grid.Column="0" Grid.RowSpan="4" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Button x:Name="btnAddCountry" Content="Add Country" Click="AddCountry_Click" />
+
+            <Button x:Name="btnUpdateCountry" Content="Update Country" Click="UpdateCountry_Click" />
+
+            <Button x:Name="btnDeleteCountry" Content="Delete Country" Click="DeleteCountry_Click" />
+        </WrapPanel>
 
 
 
-        <Button Grid.Row="3" Grid.Column="0" x:Name="btnAddCountry" Grid.ColumnSpan="2" Content="Add Country" Click="AddCountry_Click" />
-
-        <Button Grid.Row="4" Grid.Column="0" x:Name="btnUpdateCountry" Grid.ColumnSpan="2" Content="Update Country" Click="UpdateCountry_Click" />
-
-        <Button Grid.Row="5" Grid.Column="0" x:Name="btnDeleteCountry" Grid.ColumnSpan="2" Content="Delete Country" Click="DeleteCountry_Click" />
-
-        <DataGrid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" x:Name="dgCountrys" AutoGenerateColumns="True" SelectionChanged="dgCountrys_SelectionChanged" />
+        <ListView  Margin="20 10 20 0" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" x:Name="dgCountrys" SelectionChanged="dgCountrys_SelectionChanged" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Country Code" Width="150"
+                                    DisplayMemberBinding="{Binding Path=CountryCode }"/>
+                    <GridViewColumn Header="Country Name" Width="Auto"
+                                    DisplayMemberBinding="{Binding Path=CountryName }"/>
+                </GridView>
+            </ListView.View>
+            
+        </ListView>
     </Grid>
 </Window>

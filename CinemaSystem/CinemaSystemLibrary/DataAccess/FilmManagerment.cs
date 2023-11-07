@@ -91,6 +91,7 @@ namespace CinemaSystemLibrary.Controller
             return context.Films
                 .Include(x => x.Genre)
                 .Include(x => x.CountryCodeNavigation)
+                .Include(x => x.Shows)
                 .ToList();
         }
     }

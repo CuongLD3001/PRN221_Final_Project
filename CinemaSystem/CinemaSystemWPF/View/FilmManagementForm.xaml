@@ -1,8 +1,17 @@
 ﻿<Window x:Class="CinemaSystemLibrary.Views.FilmManagementForm"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Film Management" Height="600" Width="800">
+        Title="Film Management" Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="AliceBlue">
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Width" Value="70" />
+                <Setter Property="Height" Value="20" />
+                <Setter Property="Margin" Value="5 0 0 0" />
+                <Setter Property="FontWeight" Value="DemiBold" />
+                <Setter Property="Background" Value="SkyBlue" />
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -17,34 +26,58 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="300" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Grid.Row="0" Content="Back" Click="BackToMenu_Click"></Button>
+        <Button Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Content="Back" Click="BackToMenu_Click"></Button>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Film ID:" />
-        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtFilmID" Width="200" IsReadOnly="true"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Film Title:" />
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtFilmTitle" Width="200" />
+        <WrapPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Width="100" Content="Film ID:" />
+            <TextBox x:Name="txtFilmID" Width="200" IsReadOnly="true"/>
+        </WrapPanel>
+        <WrapPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Width="100" Content="Title:" />
+            <TextBox x:Name="txtFilmTitle" Width="200"/>
+        </WrapPanel>
+        <WrapPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Width="100" Content="Year:" />
+            <TextBox x:Name="txtYear" Width="200" />
+        </WrapPanel>
+        <WrapPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Width="100" Content="Genre:" />
+            <ComboBox x:Name="cboGenre" Width="200" Loaded="cboGenre_Loaded" />
+        </WrapPanel>
+      
+        <WrapPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Width="100" Content="Country:" />
+            <ComboBox x:Name="cboCountry" Width="200" Loaded="cboCountry_Loaded" />
+        </WrapPanel>
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Year:" />
-        <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtYear" Width="200" />
+        <WrapPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Button x:Name="btnAddFilm" Grid.ColumnSpan="2" Content="Add Film" Click="AddFilm_Click" />
 
-        <Label Grid.Row="4" Grid.Column="0" Content="Genre:" />
-        <ComboBox Grid.Row="4" Grid.Column="1" x:Name="cboGenre" Width="200" Loaded="cboGenre_Loaded" />
+            <Button x:Name="btnUpdateFilm" Grid.ColumnSpan="2" Content="Update Film" Click="UpdateFilm_Click" />
 
-        <Label Grid.Row="5" Grid.Column="0" Content="Country:" />
-        <ComboBox Grid.Row="5" Grid.Column="1" x:Name="cboCountry" Width="200" Loaded="cboCountry_Loaded" />
+            <Button x:Name="btnDeleteFilm" Grid.ColumnSpan="2" Content="Delete Film" Click="DeleteFilm_Click" />
+        </WrapPanel>
 
-        <Button Grid.Row="6" Grid.Column="0" x:Name="btnAddFilm" Grid.ColumnSpan="2" Content="Add Film" Click="AddFilm_Click" />
 
-        <Button Grid.Row="7" Grid.Column="0" x:Name="btnUpdateFilm" Grid.ColumnSpan="2" Content="Update Film" Click="UpdateFilm_Click" />
+        <ListView  Margin="20 10 20 0" Grid.Row="1" Grid.Column="1" Grid.RowSpan="6" x:Name="dgFilms" SelectionChanged="dgFilms_SelectionChanged" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="Auto"
+                                    DisplayMemberBinding="{Binding Path=FilmId }"/>
+                    <GridViewColumn Header="Title" Width="150"
+                                    DisplayMemberBinding="{Binding Path=Title }"/>
+                    <GridViewColumn Header="Genre" Width="100"
+                                    DisplayMemberBinding="{Binding Path=Genre.Name }"/>
+                    <GridViewColumn Header="Year" Width="50"
+                                    DisplayMemberBinding="{Binding Path=Year }"/>
+                    <GridViewColumn Header="Country" Width="100"
+                                    DisplayMemberBinding="{Binding Path=CountryCodeNavigation.CountryName }"/>
+                </GridView>
+            </ListView.View>
 
-        <Button Grid.Row="8" Grid.Column="0" x:Name="btnDeleteFilm" Grid.ColumnSpan="2" Content="Delete Film" Click="DeleteFilm_Click" />
-
-        <DataGrid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" x:Name="dgFilms" AutoGenerateColumns="True" SelectionChanged="dgFilms_SelectionChanged" />
-
-        <!-- Đặt các Control khác tại đây nếu cần -->
-
+        </ListView>
     </Grid>
 </Window>
