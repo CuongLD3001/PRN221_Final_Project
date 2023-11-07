@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CinemaSystemWPF.View"
         mc:Ignorable="d"
-        Title="CountryManagementForm" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="CountryManagementForm" Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="AliceBlue">
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button">
@@ -21,13 +21,10 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="400" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0" Grid.Row="0" Content="Back" HorizontalAlignment="Left" Click="BackToMenu_Click"></Button>
@@ -49,14 +46,14 @@
             <Button x:Name="btnDeleteCountry" Content="Delete Country" Click="DeleteCountry_Click" />
         </WrapPanel>
 
-            
 
-        <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" x:Name="dgCountrys" SelectionChanged="dgCountrys_SelectionChanged" >
+
+        <ListView  Margin="20 10 20 0" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" x:Name="dgCountrys" SelectionChanged="dgCountrys_SelectionChanged" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Country Code" Width="150"
                                     DisplayMemberBinding="{Binding Path=CountryCode }"/>
-                    <GridViewColumn Header="Country Name" Width="150"
+                    <GridViewColumn Header="Country Name" Width="Auto"
                                     DisplayMemberBinding="{Binding Path=CountryName }"/>
                 </GridView>
             </ListView.View>
