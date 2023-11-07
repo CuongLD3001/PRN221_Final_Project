@@ -5,13 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CinemaSystemWPF.View"
         mc:Ignorable="d"
-        Title="Menu" Height="450" Width="800">
+        Title="Menu" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Content="Country Management" HorizontalAlignment="Left" Margin="93,26,0,0" VerticalAlignment="Top" Width="135" Click="CountryManagement_Click"/>
-        <Button Content="Genre Management" HorizontalAlignment="Left" Margin="93,78,0,0" VerticalAlignment="Top" Width="135" Click="GenreManagement_Click"/>
-        <Button Content="Film Management" HorizontalAlignment="Left" Margin="93,132,0,0" VerticalAlignment="Top" Width="135" Click="FilmManagement_Click"/>
-        <Button Content="Booking Management" HorizontalAlignment="Left" Margin="93,282,0,0" VerticalAlignment="Top" Width="135" Click="BookingManagement_Click" RenderTransformOrigin="0.443,1.625"/>
-        <Button Content="Show Management"  HorizontalAlignment="Left" Margin="93,230,0,0" VerticalAlignment="Top" Width="135" Click="ShowManagement_Click"/>
-        <Button Content="Room Management" HorizontalAlignment="Left" Margin="93,182,0,0" VerticalAlignment="Top" Width="135" Click="RoomManagement_Click"/>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Width" Value="150" />
+                <Setter Property="Height" Value="20" />
+                <Setter Property="Margin" Value="0 20 0 0" />
+                <Setter Property="FontWeight" Value="DemiBold" />
+                <Setter Property="Background" Value="SkyBlue" />
+            </Style>
+        </Grid.Resources>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Background="AliceBlue" Height="300" Width="300">
+            <TextBlock HorizontalAlignment="Center" FontSize="30" FontWeight="Bold">Cinema System</TextBlock>
+            <Button Content="Country Management" Click="CountryManagement_Click"/>
+            <Button Content="Genre Management" Click="GenreManagement_Click"/>
+            <Button Content="Film Management" Click="FilmManagement_Click"/>
+            <Button Content="Booking Management"  Click="BookingManagement_Click" RenderTransformOrigin="0.443,1.625"/>
+            <Button Content="Show Management"   Click="ShowManagement_Click"/>
+            <Button Content="Room Management"  Click="RoomManagement_Click"/>
+        </StackPanel>
+
     </Grid>
 </Window>
