@@ -1,8 +1,20 @@
 ﻿<Window x:Class="CinemaSystemLibrary.Views.ShowManagementForm"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Show Management" Height="600" Width="800">
+        Title="Show Management" Height="450" WindowStartupLocation="CenterScreen" Width="800">
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Width" Value="100" />
+                <Setter Property="Height" Value="20" />
+                <Setter Property="Margin" Value="5 0 0 0" />
+                <Setter Property="FontWeight" Value="DemiBold" />
+                <Setter Property="Background" Value="SkyBlue" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="Width" Value="100"/>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -13,11 +25,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -25,38 +32,71 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="0" Grid.Row="0" Content="Back" Click="BackToMenu_Click"></Button>
-       
+        <Button HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Content="Back" Click="BackToMenu_Click"></Button>
+        <WrapPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Content="Room:" />
+            <ComboBox x:Name="cboRoom" Width="200" Loaded="cboRoom_Loaded" />
+        </WrapPanel>
+        <WrapPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Content="Slot:" />
+            <ComboBox x:Name="cboSlot" Width="200" Loaded="cboSlot_Loaded" />
+        </WrapPanel>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Room:" />
-        <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cboRoom" Width="200" Loaded="cboRoom_Loaded" />
-        <Label Grid.Row="2" Grid.Column="0" Content="Slot:" />
-        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="cboSlot" Width="200" Loaded="cboSlot_Loaded" />
+        <WrapPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Content="Film:" />
+            <ComboBox x:Name="cboFilm" Width="200" Loaded="cboFilm_Loaded" />
+        </WrapPanel>
+        <WrapPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Content="Show Date:" />
+            <DatePicker x:Name="dpShowDate" Width="200" />
+        </WrapPanel>
+        <WrapPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Content="Price:" />
+            <TextBox x:Name="txtPrice" Width="200" />
+        </WrapPanel>
+        <WrapPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Content="Status:" />
+            <TextBox x:Name="txtStatus" Width="200" />
+        </WrapPanel>
+        
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Film:" />
-        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="cboFilm" Width="200" Loaded="cboFilm_Loaded" />
+        <WrapPanel Grid.Row="7" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Content="ShowID:" />
+            <TextBox x:Name="txtShowId" Width="200" IsReadOnly="true" />
+        </WrapPanel>
+        
 
-        <Label Grid.Row="4" Grid.Column="0" Content="Show Date:" />
-        <DatePicker Grid.Row="4" Grid.Column="1" x:Name="dpShowDate" Width="200" />
+        <WrapPanel Grid.Row="8" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Button x:Name="btnAddShow" Grid.ColumnSpan="2" Content="Add Show" Click="AddShow_Click" />
 
-        <Label Grid.Row="5" Grid.Column="0" Content="Price:" />
-        <TextBox Grid.Row="5" Grid.Column="1" x:Name="txtPrice" Width="200" />
+            <Button x:Name="btnUpdateShow" Grid.ColumnSpan="2" Content="Update Show" Click="UpdateShow_Click" />
 
-        <Label Grid.Row="6" Grid.Column="0" Content="Status:" />
-        <TextBox Grid.Row="6" Grid.Column="1" x:Name="txtStatus" Width="200" />
+            <Button  x:Name="btnDeleteShow" Grid.ColumnSpan="2" Content="Delete Show" Click="DeleteShow_Click" />
+        </WrapPanel>
+        
 
+        <ListView  Margin="20 10 20 0" Grid.Row="1" Grid.Column="1" Grid.RowSpan="8" x:Name="dgShows" SelectionChanged="dgShows_SelectionChanged" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="30"
+                                    DisplayMemberBinding="{Binding Path=ShowId }"/>
+                    <GridViewColumn Header="Room" Width="50"
+                                    DisplayMemberBinding="{Binding Path=Room.Name }"/>
+                    <GridViewColumn Header="Slot" Width="30"
+                                    DisplayMemberBinding="{Binding Path=Slot }"/>
+                    <GridViewColumn Header="Film" Width="100"
+                                    DisplayMemberBinding="{Binding Path=Film.Title }"/>
+                    <GridViewColumn Header="Date" Width="70"
+                                    DisplayMemberBinding="{Binding Path=ShowDate }"/>
+                    <GridViewColumn Header="Price" Width="50"
+                                    DisplayMemberBinding="{Binding Path=Price }"/>
+                    <GridViewColumn Header="Status" Width="50"
+                                    DisplayMemberBinding="{Binding Path=Status }"/>
+                    
+                </GridView>
+            </ListView.View>
 
-        <Label Grid.Row="7" Grid.Column="0" Content="ShowID:" />
-        <TextBox Grid.Row="7" Grid.Column="1" x:Name="txtShowId" Width="200" IsReadOnly="true" />
-
-        <Button Grid.Row="8" Grid.Column="0" x:Name="btnAddShow" Grid.ColumnSpan="2" Content="Add Show" Click="AddShow_Click" />
-
-        <Button Grid.Row="9" Grid.Column="0" x:Name="btnUpdateShow" Grid.ColumnSpan="2" Content="Update Show" Click="UpdateShow_Click" />
-
-        <Button Grid.Row="10" Grid.Column="0" x:Name="btnDeleteShow" Grid.ColumnSpan="2" Content="Delete Show" Click="DeleteShow_Click" />
-
-        <DataGrid Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" x:Name="dgShows" AutoGenerateColumns="True" SelectionChanged="dgShows_SelectionChanged" />
-
+        </ListView>
         <!-- Đặt các Control khác tại đây nếu cần -->
 
     </Grid>
