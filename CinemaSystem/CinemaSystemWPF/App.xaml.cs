@@ -46,6 +46,7 @@ namespace CinemaSystemLibrary
             services.AddSingleton<RoomManagementForm>();
             services.AddSingleton<MenuForm>();
             services.AddSingleton<Show>();
+            services.AddSingleton<Login>();
         }
 
         private void OnStartUp(object sender, StartupEventArgs e)
@@ -55,7 +56,7 @@ namespace CinemaSystemLibrary
             // var mainWindow = serviceProvider.GetService<RoomManagementForm>();
             //    var mainWindow = serviceProvider.GetService<BookingForm>();
             // var mainWindow = serviceProvider.GetService<FilmManagementForm>();
-            var mainWindow = serviceProvider.GetService<MenuForm>();
+            var mainWindow = serviceProvider.GetService<Login>();
             mainWindow.Show();
         }
     }
