@@ -33,7 +33,7 @@ namespace CinemaSystemLibrary.Controller
             }
         }
 
-        public void AddShow(int roomId, int filmId, DateTime showDate, double price, string status, int slot)
+        public int AddShow(int roomId, int filmId, DateTime showDate, double price, string status, int slot)
         {
             
                 Show show = new Show
@@ -48,7 +48,7 @@ namespace CinemaSystemLibrary.Controller
 
                 context.Shows.Add(show);
                 context.SaveChanges();
-            
+            return show.ShowId;
             
         }
 
@@ -86,6 +86,13 @@ namespace CinemaSystemLibrary.Controller
         {
 
             return context.Shows.Include(s => s.Film).Include( s => s.Room).ToList();
+        }
+
+        public List<Show> FindShowByFilmAndDate(DateTime? date, int filmId)
+        {
+            return context.Shows.Include(s => s.Film).Include(s => s.Room)
+                .Where(x => x.FilmId == filmId)
+                .Where(x => x.ShowDate== date).ToList();
         }
     }
 }

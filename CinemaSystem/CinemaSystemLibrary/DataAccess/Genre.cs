@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CinemaSystemLibrary.DataAccess;
-
-public partial class Genre
+namespace CinemaSystemLibrary.DataAccess
 {
-    public int GenreId { get; set; }
+    public partial class Genre
+    {
+        public Genre()
+        {
+            Films = new HashSet<Film>();
+        }
 
-    public string Name { get; set; } = null!;
+        public int GenreId { get; set; }
+        public string Name { get; set; } = null!;
 
-    public virtual ICollection<Film> Films { get; set; } = new List<Film>();
+        public virtual ICollection<Film> Films { get; set; }
+    }
 }

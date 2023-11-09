@@ -7,9 +7,9 @@ namespace CinemaSystemLibrary.ViewModel
 {
     public class ShowVM : IShowManagement
     {
-        public void AddShow(int roomId, int filmId, DateTime showDate, double price, string status, int slot)
+        public int AddShow(int roomId, int filmId, DateTime showDate, double price, string status, int slot)
         {
-            ShowManagement.Instance.AddShow(roomId, filmId, showDate, price, status, slot);
+            return ShowManagement.Instance.AddShow(roomId, filmId, showDate, price, status, slot);
         }
 
         public void UpdateShow(int showId, int roomId, int filmId, DateTime showDate, double price, string status, int slot)
@@ -25,6 +25,11 @@ namespace CinemaSystemLibrary.ViewModel
         public List<Show> GetAllShows()
         {
             return ShowManagement.Instance.GetAllShows();
+        }
+
+        public List<Show> FindShowByFilmAndDate(DateTime? date, int filmId)
+        {
+            return ShowManagement.Instance.FindShowByFilmAndDate(date, filmId);
         }
     }
 }

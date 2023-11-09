@@ -7,6 +7,6 @@ namespace CinemaSystemLibrary.ViewModel
     public interface IBookingManagement
     {
         void AddBooking(int showId, string seatNumber, double? amount, string status);
-        List<Booking> GetBookingsForShow(int showId);
+        List<Booking> GetBookings();
     }
 }

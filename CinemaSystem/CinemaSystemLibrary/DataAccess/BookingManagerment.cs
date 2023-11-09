@@ -59,9 +59,9 @@ namespace CinemaSystemLibrary.DataAccess
         }
 
 
-        public List<Booking> GetBookingsForShow(int showId)
+        public List<Booking> GetBookings()
         {
-            return context.Bookings.Where(b => b.ShowId == showId).ToList();
+            return context.Bookings.Include(x => x.Show).Include(x => x.Show.Film).Include(x => x.Show.Room).ToList();
         }
     }
 }

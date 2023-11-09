@@ -12,9 +12,11 @@ namespace CinemaSystemLibrary.Views
         private IShowManagement _showManagement;
         private IRoomManagement _roomManagement;
         private IFilmManagement _filmManagement;
+        private ISeatManagement _seatManagement;
         public List<int> slots = new List<int> { 1, 2, 3, 4, 5,6, 7, 8, 9 };
+        
 
-        public ShowManagementForm(IShowManagement showManagement, IRoomManagement roomManagement, IFilmManagement filmManagement)
+        public ShowManagementForm(IShowManagement showManagement, IRoomManagement roomManagement, IFilmManagement filmManagement, ISeatManagement seatManagement)
         {
             _showManagement = showManagement;
             _roomManagement = roomManagement;
@@ -26,6 +28,7 @@ namespace CinemaSystemLibrary.Views
 
             _roomManagement = roomManagement;
             _filmManagement = filmManagement;
+            _seatManagement = seatManagement;
         }
 
         // Sự kiện xảy ra khi form được tải
@@ -51,8 +54,11 @@ namespace CinemaSystemLibrary.Views
                 int slot = int.Parse(cboSlot.Text);
 
                 // Thêm show mới
-                _showManagement.AddShow(roomId, filmId, showDate, price, status, slot);
-
+                int showId = _showManagement.AddShow(roomId, filmId, showDate, price, status, slot);
+                for (int i = 1; i<= 25; i++)
+                {
+                    _seatManagement.AddSeat(showId, 0, null, i.ToString());
+                }
                 // Cập nhật DataGrid hoặc thông báo thành công
                 List<Show> shows = _showManagement.GetAllShows();
                 dgShows.ItemsSource = shows;

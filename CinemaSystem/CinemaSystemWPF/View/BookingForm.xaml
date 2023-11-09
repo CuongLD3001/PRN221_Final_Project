@@ -1,41 +1,147 @@
 ﻿<Window x:Class="CinemaSystemLibrary.Views.BookingForm"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Booking Form" Height="600" Width="800">
+        Title="Booking Form" Height="600" Width="800" WindowStartupLocation="CenterScreen" Background="AliceBlue">
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Width" Value="20" />
+                <Setter Property="Height" Value="20" />
+                <Setter Property="Margin" Value="5 0 0 0" />
+                <Setter Property="FontWeight" Value="DemiBold" />
+                <Setter Property="Background" Value="AntiqueWhite" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="Width" Value="120"/>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="10" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="400" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Content="Back" Click="BackToMenu_Click"></Button>
-        <Label Grid.Row="1" Grid.Column="0" Content="Film Title:" />
-        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtFilmTitle" Width="200" />
+        
+        <Button Background="SkyBlue" Width="100" Grid.Row="0" HorizontalAlignment="Left" Grid.Column="0" Content="Back" Click="BackToMenu_Click"></Button>
+        <WrapPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Content="Film Title:" />
+            <ComboBox  x:Name="cboFilm" Width="200" SelectionChanged="dpkDate_SelectedDateChanged" />
+        </WrapPanel>
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Show Time:" />
-        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="cboShowTime" Width="200" />
+        <WrapPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Content="Date:" />
+            <DatePicker x:Name="dpkDate" Width="200" SelectedDateChanged="dpkDate_SelectedDateChanged" />
+        </WrapPanel>
+        
+        <WrapPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Content="Slot" />
+            <ComboBox x:Name="cboSlot" Width="200" SelectionChanged="cboSlot_SelectionChanged"/>
+        </WrapPanel>
+        
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Customer Name:" />
-        <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtCustomerName" Width="200" />
+        <WrapPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Label Content="Customer Contact:" />
+            <TextBox x:Name="txtCustomerName" Width="200" />
+        </WrapPanel>
+       
 
-        <Label Grid.Row="4" Grid.Column="0" Content="Select Seats:" />
-        <ListBox Grid.Row="4" Grid.Column="1" x:Name="lstSelectedSeats" Width="200" Height="100" SelectionMode="Multiple" />
+            <Label HorizontalContentAlignment="Center" FontSize="20" Grid.Row="1" Grid.Column="1" Content="Select Seats:" />
 
-        <Button Grid.Row="5" Grid.Column="0" x:Name="btnBookSeats" Grid.ColumnSpan="2" Content="Book Seats" Click="BookSeats_Click" />
+            <Grid Grid.Row="2" Grid.Column="1" Grid.RowSpan="3" Width="150" Height="150" x:Name="seatGrid" Margin="20">
+                <Grid.Resources>
+                    
+                    <SolidColorBrush x:Key="TakenSeatColor" Color="Red"/>
+                    <SolidColorBrush x:Key="AvailableSeatColor" Color="Green"/>
+                </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0" Margin="5" Content="A0" Name="seat_1" Click="seat_Click" />
+            <Button Grid.Row="0" Grid.Column="1" Margin="5" Content="A1" Name="seat_2" Click="seat_Click"/>
+            <Button Grid.Row="0" Grid.Column="2" Margin="5" Content="A2" Name="seat_3" Click="seat_Click"/>
+            <Button Grid.Row="0" Grid.Column="3" Margin="5" Content="A3" Name="seat_4" Click="seat_Click"/>
+            <Button Grid.Row="0" Grid.Column="4" Margin="5" Content="A4" Name="seat_5" Click="seat_Click"/>
 
-        <DataGrid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" x:Name="dgBookingInfo" AutoGenerateColumns="True" />
+            <!-- Hàng 2 -->
+            <Button Grid.Row="1" Grid.Column="0" Margin="5" Content="B0" Name="seat_6" Click="seat_Click"/>
+            <Button Grid.Row="1" Grid.Column="1" Margin="5" Content="B1" Name="seat_7" Click="seat_Click"/>
+            <Button Grid.Row="1" Grid.Column="2" Margin="5" Content="B2" Name="seat_8" Click="seat_Click"/>
+            <Button Grid.Row="1" Grid.Column="3" Margin="5" Content="B3" Name="seat_9" Click="seat_Click"/>
+            <Button Grid.Row="1" Grid.Column="4" Margin="5" Content="B4" Name="seat_10" Click="seat_Click"/>
 
-        <!-- Đặt các Control khác tại đây nếu cần -->
+            <Button Grid.Row="2" Grid.Column="0" Margin="5" Content="C0" Name="seat_11" Click="seat_Click"/>
+            <Button Grid.Row="2" Grid.Column="1" Margin="5" Content="C1" Name="seat_12" Click="seat_Click"/>
+            <Button Grid.Row="2" Grid.Column="2" Margin="5" Content="C2" Name="seat_13" Click="seat_Click"/>
+            <Button Grid.Row="2" Grid.Column="3" Margin="5" Content="C3" Name="seat_14" Click="seat_Click"/>
+            <Button Grid.Row="2" Grid.Column="4" Margin="5" Content="C4" Name="seat_15" Click="seat_Click"/>
+
+            <!-- Hàng 4 -->
+            <Button Grid.Row="3" Grid.Column="0" Margin="5" Content="D0" Name="seat_16" Click="seat_Click"/>
+            <Button Grid.Row="3" Grid.Column="1" Margin="5" Content="D1" Name="seat_17" Click="seat_Click"/>
+            <Button Grid.Row="3" Grid.Column="2" Margin="5" Content="D2" Name="seat_18" Click="seat_Click"/>
+            <Button Grid.Row="3" Grid.Column="3" Margin="5" Content="D3" Name="seat_19" Click="seat_Click"/>
+            <Button Grid.Row="3" Grid.Column="4" Margin="5" Content="D4" Name="seat_20" Click="seat_Click"/>
+
+            <!-- Hàng 5 -->
+            <Button Grid.Row="4" Grid.Column="0" Margin="5" Content="E0" Name="seat_21" Click="seat_Click"/>
+            <Button Grid.Row="4" Grid.Column="1" Margin="5" Content="E1" Name="seat_22" Click="seat_Click"/>
+            <Button Grid.Row="4" Grid.Column="2" Margin="5" Content="E2" Name="seat_23" Click="seat_Click"/>
+            <Button Grid.Row="4" Grid.Column="3" Margin="5" Content="E3" Name="seat_24" Click="seat_Click"/>
+            <Button Grid.Row="4" Grid.Column="4" Margin="5" Content="E4" Name="seat_25" Click="seat_Click"/>
+                
+            
+                
+                
+        </Grid>
+
+            
+
+        <Label Grid.Row="6" Grid.Column="1" FontSize="13" FontStyle="Italic" FontWeight="Bold" HorizontalContentAlignment="Center" Width="350" x:Name="totalPriceLabel" Content="Total Price: $0"/>
+        <Button Background="SkyBlue" Width="100" Grid.Row="6" Grid.Column="0" x:Name="btnBookSeats" Grid.ColumnSpan="1" Content="Book Seats" Click="BookSeats_Click" />
+
+        <ListView Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="20 10 20 0" x:Name="dgBookingInfo" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="30"
+                                    DisplayMemberBinding="{Binding Path=BookingId }"/>
+                    <GridViewColumn Header="Room" Width="70"
+                                    DisplayMemberBinding="{Binding Path=Show.Room.Name }"/>
+                    <GridViewColumn Header="Film" Width="200"
+                                    DisplayMemberBinding="{Binding Path=Show.Film.Title }"/>
+                    <GridViewColumn Header="Slot" Width="50"
+                                    DisplayMemberBinding="{Binding Path=Show.Slot }"/>
+                    <GridViewColumn Header="Seat" Width="150"
+                                    DisplayMemberBinding="{Binding Path=SeatNumber }"/>
+                    <GridViewColumn Header="Amount" Width="100"
+                                    DisplayMemberBinding="{Binding Path=Amount }"/>
+                    <GridViewColumn Header="Customer Info" Width="100"
+                                    DisplayMemberBinding="{Binding Path=Status }"/>
+
+                </GridView>
+            </ListView.View>
+
+        </ListView>
 
     </Grid>
 </Window>

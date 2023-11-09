@@ -9,9 +9,9 @@ namespace CinemaSystemLibrary.ViewModel
             BookingManagerment.Instance.AddBooking(showId, seatNumber, amount, status);
         }
 
-        public List<Booking> GetBookingsForShow(int showId)
+        public List<Booking> GetBookings()
         {
-            return BookingManagerment.Instance.GetBookingsForShow(showId);
+            return BookingManagerment.Instance.GetBookings();
         }
     }
 }

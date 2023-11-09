@@ -50,10 +50,13 @@ namespace CinemaSystemWPF.View
 
         private void BookingManagement_Click(object sender, RoutedEventArgs e)
         {
-           /* IBookingManagement bookingManagement = new BookingManagerment();
-            BookingForm booking = new BookingForm(IBookingManagement bookingManagement, int showId, double showPrice);
+            IBookingManagement bookingManagement = new BookingManagerment();
+            IFilmManagement filmManagement = new FilmManagerment();
+            IShowManagement showManagement = new ShowManagement();
+            ISeatManagement seatManagement = new SeatManagement();
+            BookingForm booking = new BookingForm(bookingManagement, filmManagement, showManagement, seatManagement);
             this.Visibility = Visibility.Hidden;
-            booking.Show();*/
+            booking.Show();
         }
 
         private void ShowManagement_Click(object sender, RoutedEventArgs e)
@@ -61,7 +64,8 @@ namespace CinemaSystemWPF.View
             IShowManagement showManagement = new ShowManagement();
             IRoomManagement roomManagement = new RoomManagerment();
             IFilmManagement filmManagement = new FilmManagerment();
-            ShowManagementForm showForm = new ShowManagementForm(showManagement, roomManagement, filmManagement);
+            ISeatManagement seatManagement = new SeatManagement();
+            ShowManagementForm showForm = new ShowManagementForm(showManagement, roomManagement, filmManagement, seatManagement);
             this.Visibility = Visibility.Hidden;
             showForm.Show();
 
