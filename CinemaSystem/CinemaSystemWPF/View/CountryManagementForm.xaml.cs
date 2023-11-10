@@ -75,6 +75,11 @@ namespace CinemaSystemWPF.View
             {
                 _countryManagement.UpdateCountry(countryCode, countryName);
                 dgCountrys.ItemsSource = _countryManagement.GetAllCountries();
+                if ((Country)dgCountrys.SelectedItem != null)
+                {
+                    txtCountryCode.Text = ((Country)dgCountrys.SelectedItem).CountryCode;
+                    txtCountryName.Text = ((Country)dgCountrys.SelectedItem).CountryName;
+                }
                 MessageBox.Show("Quốc gia đã được cập nhật thành công.");
             }
             catch (Exception ex)
@@ -92,7 +97,9 @@ namespace CinemaSystemWPF.View
             {
                 _countryManagement.DeleteCountry(countryCode);
                 dgCountrys.ItemsSource = _countryManagement.GetAllCountries();
+    
                 MessageBox.Show("Quốc gia đã được xóa thành công.");
+
             }
             catch (Exception ex)
             {

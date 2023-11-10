@@ -63,10 +63,12 @@ namespace CinemaSystemWPF.View
             {
                 // Hash the password
                 string hashedPassword = HashPassword(txtNewPassword.Password);
-
+                Random rnd = new Random();
+                int num = rnd.Next(0, 1000);
                 // Create a new User object with the registration data
                 var newUser = new User
                 {
+                    Id = num,
                     Username = txtUsername.Text,
                     Password = hashedPassword,
                     Name = txtName.Text,
